@@ -65,6 +65,11 @@
 
 
             <?php if (isset($_GET['pesan'])): ?>
+                <?php elseif ($_GET['pesan'] === "registrasi_berhasil"): ?>
+
+                    <div class="alert-box alert-success">
+                        Akun berhasil dibuat. Silakan login.
+                    </div>
 
                 <?php if ($_GET['pesan'] === "gagal"): ?>
 
