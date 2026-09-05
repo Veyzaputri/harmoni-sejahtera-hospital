@@ -1,0 +1,445 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #168b7e;
+    --primary-dark: #0f665e;
+    --primary-soft: #e8f6f3;
+
+    --navy: #173d46;
+    --text: #40555a;
+    --muted: #75878b;
+
+    --background: #f5faf9;
+    --white: #ffffff;
+    --border: #dce9e6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 90% 10%, #dbf3ef 0, transparent 28%),
+        var(--background);
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    background: rgba(255,255,255,.96);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    backdrop-filter: blur(10px);
+}
+
+.hospital-brand {
+    color: var(--navy) !important;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.brand-icon {
+    color: var(--primary);
+    margin-right: 7px;
+}
+
+.nav-link {
+    color: #52666c !important;
+    font-weight: 500;
+    margin: 0 5px;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: var(--primary) !important;
+}
+
+
+/* PAGE */
+
+.patient-page {
+    padding: 60px 0 90px;
+}
+
+.page-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+
+    margin-bottom: 35px;
+}
+
+.page-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--primary);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.page-heading h1 {
+    margin: 0 0 10px;
+
+    color: var(--navy);
+
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+.page-heading p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+}
+
+.queue-button {
+    flex-shrink: 0;
+
+    padding: 12px 20px;
+
+    background: white;
+    border: 1px solid var(--border);
+
+    color: var(--primary-dark);
+
+    border-radius: 10px;
+
+    text-decoration: none;
+    font-weight: 700;
+
+    transition: .2s;
+}
+
+.queue-button:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+
+    transform: translateY(-2px);
+}
+
+
+/* CARD */
+
+.form-card {
+    max-width: 1000px;
+
+    background: white;
+
+    padding: 36px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    box-shadow: 0 18px 50px rgba(23,61,70,.07);
+}
+
+.form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.form-icon {
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--primary-soft);
+
+    border-radius: 14px;
+
+    font-size: 25px;
+}
+
+.form-card-header h2 {
+    margin: 0 0 5px;
+
+    color: var(--navy);
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.form-card-header p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* FORM */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+.form-full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--navy);
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-group label span {
+    color: var(--primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+
+    background: #fbfdfc;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    color: var(--text);
+
+    outline: none;
+
+    transition: .2s;
+}
+
+.form-group input,
+.form-group select {
+    height: 52px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    background: white;
+
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 4px rgba(22,139,126,.09);
+}
+
+
+/* GENDER */
+
+.gender-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.radio-card {
+    min-height: 52px;
+
+    display: flex !important;
+    align-items: center;
+
+    padding: 12px 15px;
+
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+
+    background: #fbfdfc;
+
+    cursor: pointer;
+}
+
+.radio-card input {
+    width: auto;
+    height: auto;
+
+    margin: 0 10px 0 0;
+}
+
+.radio-card span {
+    color: var(--text) !important;
+    font-weight: 500;
+}
+
+
+/* BUTTONS */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    margin-top: 32px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid var(--border);
+}
+
+.btn-cancel,
+.btn-submit {
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+.btn-cancel {
+    background: white;
+    border: 1px solid var(--border);
+
+    color: var(--text);
+}
+
+.btn-submit {
+    border: none;
+
+    background: var(--primary);
+    color: white;
+
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: var(--primary-dark);
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 8px 22px rgba(15,102,94,.17);
+}
+
+
+/* ALERT / NOTE */
+
+.alert-custom {
+    max-width: 1000px;
+
+    margin-bottom: 20px;
+
+    padding: 15px 18px;
+
+    background: #fff6e5;
+
+    border-radius: 10px;
+
+    color: #976519;
+}
+
+.info-note {
+    max-width: 1000px;
+
+    display: flex;
+    gap: 12px;
+
+    margin-top: 20px;
+
+    padding: 17px 20px;
+
+    background: var(--primary-soft);
+
+    border-radius: 12px;
+
+    color: #52716d;
+}
+
+.info-note p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .patient-page {
+        padding: 40px 0 60px;
+    }
+
+    .page-heading {
+        display: block;
+    }
+
+    .queue-button {
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    .form-card {
+        padding: 24px 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-full {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .gender-options {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-cancel,
+    .btn-submit {
+        width: 100%;
+        text-align: center;
+    }
+}
