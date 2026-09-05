@@ -1,92 +1,265 @@
 <?php
 session_start();
-if(empty($_SESSION['username'])){
-    header("location:login.php?pesan=belum_login");
+
+if (empty($_SESSION['username'])) {
+    header("Location: login.php?pesan=belum_login");
+    exit;
 }
 
+include "koneksi.php";
+
+$query = mysqli_query(
+    $connect,
+    "SELECT pasien.*, dokter.nama_dokter
+     FROM pasien
+     LEFT JOIN dokter
+     ON pasien.id_dokter = dokter.id_dokter
+     ORDER BY pasien.ID_pasien ASC"
+);
+
+$totalPasien = mysqli_num_rows($query);
 ?>
+
 <!doctype html>
-<html lang="en">
-  <head>
+<html lang="id">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tampil Pasien</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  
-<link rel="stylesheet" href="tampilpasien.css">  </head>
-  <body>
-  <nav class="navbar bg-body-primary fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Antrian</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="home.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="form_pasien.php">Daftar pasien</a>
-          </li>
-        
-      </div>
+
+    <title>Antrian Pasien | Harmoni Sejahtera</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="queue.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand hospital-brand" href="home.php">
+            <span class="brand-icon">✚</span>
+            Harmoni Sejahtera
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="home.php">Beranda</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="form_pasien.php">Daftar Pasien</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="tampil_pasien.php">Antrian</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="jadwal_dokter.php">Dokter</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="logout.php">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+
     </div>
-  </div>
 </nav>
 
 
+<main class="queue-page">
 
-    <center>
-     
-    <h1 style="margin-top:100px;">Daftar Pasien</h1>
-    <a class="btn btn-secondary" href="form_pasien.php" role="button" style="margin-top:20px; margin-bottom:20px;">Add Pasien</a>
-    <table class="table table-bordered center">
-      <thead>
-    <tr>
-        <th>No Antrian</th>
-        <th>Nama Pasien</th>
-        <th>Tanggal Lahir</th>
-        <th>Jenis Kelamin</th>
-        <th>No. Kontak</th>
-        <th>Alamat</th>
-        <th>Id Dokter</th>
-        <th>Option</th>
-    </tr>
-    </thead>
-    <?php 
-    include 'koneksi.php';
-    $query=mysqli_query($connect, "SELECT * FROM pasien" );
-    while ($data=mysqli_fetch_array($query))
-    {?>
-    <tbody>
-    <tr>
-        <td><?php echo $data['ID_pasien'] ?></td>
-        <td><?php echo $data['nama_pasien'] ?></td>
-        <td><?php echo $data['tgl_lahir'] ?></td>
-        <td><?php echo $data['jenis_kelamin'] ?></td>
-        <td><?php echo $data['no_kontak'] ?></td>
-        <td><?php echo $data['alamat'] ?></td>
-        <td><?php echo $data['id_dokter'] ?></td>
-        <td>
-          <center>
-           <a href="edit.php?ID_pasien=<?php echo $data['ID_pasien']; ?>"> <button type="button" class="btn btn-outline-secondary">Edit</button></a>
-           <a href="hapus.php?ID_pasien=<?php echo $data['ID_pasien']; ?>">  <button type="button" class="btn btn-outline-secondary">Done</button></a>
-           </center>
-          </td>
-          
-           
-           
-    </tr>
-    </tbody>
-    <?php } ?>
-    </table>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    </center>
-  </body>
+    <div class="container">
+
+        <div class="page-heading">
+
+            <div>
+                <span class="page-label">Pelayanan Pasien</span>
+
+                <h1>Daftar Antrian Pasien</h1>
+
+                <p>
+                    Pantau pasien yang terdaftar dan kelola proses
+                    pelayanan dengan lebih mudah.
+                </p>
+            </div>
+
+            <a href="form_pasien.php" class="add-button">
+                + Tambah Pasien
+            </a>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">📋</div>
+
+            <div>
+                <span>Total Pasien Terdaftar</span>
+                <strong><?= $totalPasien; ?></strong>
+            </div>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <div>
+                    <h2>Antrian Hari Ini</h2>
+                    <p>Daftar pasien yang sedang tercatat dalam sistem.</p>
+                </div>
+
+            </div>
+
+
+            <?php if ($totalPasien > 0): ?>
+
+                <div class="table-responsive">
+
+                    <table class="patient-table">
+
+                        <thead>
+                            <tr>
+                                <th>No. Antrian</th>
+                                <th>Pasien</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Kontak</th>
+                                <th>Dokter</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <?php while ($data = mysqli_fetch_assoc($query)): ?>
+
+                            <tr>
+
+                                <td>
+                                    <span class="queue-number">
+                                        <?= htmlspecialchars($data["ID_pasien"]); ?>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <div class="patient-name">
+                                        <div class="patient-avatar">
+                                            <?= strtoupper(substr($data["nama_pasien"], 0, 1)); ?>
+                                        </div>
+
+                                        <div>
+                                            <strong>
+                                                <?= htmlspecialchars($data["nama_pasien"]); ?>
+                                            </strong>
+
+                                            <span>
+                                                <?= htmlspecialchars($data["alamat"] ?: "-"); ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <?= htmlspecialchars($data["tgl_lahir"]); ?>
+                                </td>
+
+                                <td>
+                                    <span class="gender-badge">
+                                        <?= htmlspecialchars($data["jenis_kelamin"]); ?>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <?= htmlspecialchars($data["no_kontak"] ?: "-"); ?>
+                                </td>
+
+                                <td>
+                                    <?= htmlspecialchars(
+                                        $data["nama_dokter"] ?: "Belum dipilih"
+                                    ); ?>
+                                </td>
+
+                                <td>
+
+                                    <div class="actions">
+
+                                        <a
+                                            href="periksa_pasien.php?ID_pasien=<?= urlencode($data["ID_pasien"]); ?>"
+                                            class="btn-examine">
+                                            Periksa
+                                        </a>
+
+                                        <a
+                                            href="edit.php?ID_pasien=<?= urlencode($data["ID_pasien"]); ?>"
+                                            class="btn-edit">
+                                            Edit
+                                        </a>
+
+                                        <a
+                                            href="hapus.php?ID_pasien=<?= urlencode($data["ID_pasien"]); ?>"
+                                            class="btn-done"
+                                            onclick="return confirm('Selesaikan dan hapus pasien ini dari daftar?')">
+                                            Selesai
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        <?php endwhile; ?>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            <?php else: ?>
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">📋</div>
+
+                    <h3>Belum Ada Pasien</h3>
+
+                    <p>
+                        Belum ada pasien yang terdaftar dalam antrean.
+                    </p>
+
+                    <a href="form_pasien.php">
+                        Daftarkan Pasien
+                    </a>
+
+                </div>
+
+            <?php endif; ?>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>
