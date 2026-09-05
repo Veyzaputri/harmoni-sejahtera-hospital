@@ -1,96 +1,288 @@
+<?php
+session_start();
+
+if (empty($_SESSION["username"])) {
+    header("Location: login.php?pesan=belum_login");
+    exit;
+}
+?>
+
 <!doctype html>
-<html lang="en">
-  <head>
+<html lang="id">
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Visi, Misi, dan Tujuan</title>
-    <link rel="stylesheet" type="text/css" href="visimisi.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
-  </head>
-  <body>
-  <nav class="navbar navbar-expand-lg bg-body-primary" style="display: inline-block; font-size: 25px; color: #132639; text-decoration: none; font-weight: 500; margin-left: 35px; transition: .3s; animation: slideTop .5s ease forwards; animation-delay: calc(.2s * var(--i));">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">psychiatric hospital</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-      <li class="nav-item">
-          <a class="nav-link" href="home.php">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Anggota</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tamoil_pasien.php">Antrian</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="jadwal_dokter.php">Dokter</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="form_pasien.php">Pasien</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Informasi Lainnya
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="https://maps.app.goo.gl/WjigaZYFWVvL7iJd9">LOKASI</a></li>
-            <li><a class="dropdown-item" href="logout.php">LOGOUT</a></li>
-          </ul>
-        </li>
-      </ul>
+
+    <title>Visi & Misi | Harmoni Sejahtera</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="information.css">
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand hospital-brand" href="home.php">
+            <span class="brand-icon">✚</span>
+            Harmoni Sejahtera
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="home.php">Beranda</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="profil.php">Profil</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="tentang.php">Tentang</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="visimisi.php">
+                        Visi & Misi
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="artikel.php">Artikel</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="logout.php">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
     </div>
-  </div>
+
 </nav>
-<center>
-<section>
-  <div class="portofolio" id="portofolio">
-  <div class="container">
-      <h3 class="sub-title" style="color:gray;"> Visi, Misi, dan Tujuan <br>
-      <span> Harmoni Sejahtera Mental Hospital</span></h3>
-      <div class="portofolio-list">
 
-<div class = "gambar">
-<img src="konsul.jpg" alt="profil-background" style="height: 350px; width: 500px;">
 
-<div class="row justify-content-around m-10">
-  <div class="col-4">
-  <div class = "visimisi" style="height: 350px; width: 350px;">
-  <p>Visi</p>
-  Menjadi pusat kesehatan jiwa terkemuka yang mendukung penyembuhan holistik bagi setiap individu dan masyarakat, dengan fokus pada pemulihan, pencegahan, dan peningkatan kualitas hidup.
-  </div>
-  </div>
+<main>
 
-  <div class="col-4">
-  <div class = "visimisi" style="height: 350px; width: 350px;">
-  <p>Misi</p>
-  1.	Memberikan layanan kesehatan jiwa yang berkualitas tinggi dengan pendekatan yang holistik dan terintegrasi.
-<br>2.	Menyediakan program edukasi untuk meningkatkan kesadaran dan pemahaman tentang kesehatan mental.
-<br>3.	Membangun kemitraan dengan komunitas untuk meningkatkan pemahaman tentang masalah kesehatan mental dan mengurangi stigma.
-<br> 4.	Melakukan penelitian untuk terus meningkatkan metode perawatan dan inovasi dalam bidang kesehatan mental.
+<section class="vision-hero">
+
+    <div class="container">
+
+        <div class="vision-hero-content">
+
+            <span class="page-label">
+                Arah & Komitmen
+            </span>
+
+            <h1>
+                Visi, Misi &
+                <span>Tujuan Kami.</span>
+            </h1>
+
+            <p>
+                Prinsip yang menjadi dasar dalam pengembangan konsep
+                pelayanan Harmoni Sejahtera Mental Hospital.
+            </p>
+
+        </div>
+
     </div>
-  </div>
 
-  <div class="col-4">
-  <div class = "visimisi" style="height: 350px; width: 350px;">
-  <p>Tujuan</p>
-  1.	Menyediakan perawatan yang holistik untuk pasien dengan berbagai kondisi kesehatan mental.
-<br> 2.	Mengurangi stigma terkait dengan masalah kesehatan mental di masyarakat.
-<br> 3.	Menjadi pusat unggulan dalam penelitian dan pengembangan terkait dengan kesehatan mental.
-<br> 4.	Membangun kemitraan yang kuat dengan komunitas untuk memberikan pendidikan dan dukungan yang diperlukan.
-  </div>
-</div>
-</div>
-
-</div>
-</div>
-</div>
-</div>
 </section>
-</center>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
+
+
+<section class="content-section">
+
+    <div class="container">
+
+
+        <div class="vision-grid">
+
+
+            <article class="vision-card highlight-card">
+
+                <div class="vision-icon">
+                    👁
+                </div>
+
+                <span>Visi</span>
+
+                <h2>
+                    Mendukung kehidupan yang lebih sehat dan seimbang.
+                </h2>
+
+                <p>
+                    Menjadi pusat kesehatan jiwa yang mendukung
+                    penyembuhan holistik bagi setiap individu dan
+                    masyarakat dengan fokus pada pemulihan,
+                    pencegahan, dan peningkatan kualitas hidup.
+                </p>
+
+            </article>
+
+
+            <article class="vision-card">
+
+                <div class="vision-icon">
+                    🎯
+                </div>
+
+                <span>Misi</span>
+
+                <h2>
+                    Langkah yang Kami Jalankan
+                </h2>
+
+
+                <ol class="mission-list">
+
+                    <li>
+                        Memberikan pelayanan kesehatan mental
+                        dengan pendekatan yang holistik dan
+                        terintegrasi.
+                    </li>
+
+                    <li>
+                        Menyediakan edukasi untuk meningkatkan
+                        kesadaran mengenai kesehatan mental.
+                    </li>
+
+                    <li>
+                        Mendukung keterlibatan komunitas dalam
+                        mengurangi stigma kesehatan mental.
+                    </li>
+
+                    <li>
+                        Mendorong pengembangan metode pelayanan
+                        dan inovasi kesehatan mental.
+                    </li>
+
+                </ol>
+
+            </article>
+
+
+            <article class="vision-card">
+
+                <div class="vision-icon">
+                    🌱
+                </div>
+
+                <span>Tujuan</span>
+
+                <h2>
+                    Dampak yang Ingin Dicapai
+                </h2>
+
+
+                <ol class="mission-list">
+
+                    <li>
+                        Mendukung pelayanan holistik untuk berbagai
+                        kebutuhan kesehatan mental.
+                    </li>
+
+                    <li>
+                        Meningkatkan pemahaman masyarakat dan
+                        membantu mengurangi stigma.
+                    </li>
+
+                    <li>
+                        Mendukung pengembangan pengetahuan dan
+                        pelayanan kesehatan mental.
+                    </li>
+
+                    <li>
+                        Membangun hubungan yang lebih baik dengan
+                        keluarga dan komunitas.
+                    </li>
+
+                </ol>
+
+            </article>
+
+
+        </div>
+
+
+        <div class="vision-quote">
+
+            <div class="quote-symbol">
+                “
+            </div>
+
+            <div>
+
+                <h2>
+                    Kesehatan mental adalah bagian dari
+                    kualitas hidup.
+                </h2>
+
+                <p>
+                    Harmoni Sejahtera hadir sebagai konsep pelayanan
+                    yang menempatkan keseimbangan dan kesejahteraan
+                    sebagai bagian utama dari proses pemulihan.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="cta-box">
+
+            <div>
+
+                <span>Mulai dari Sekarang</span>
+
+                <h2>
+                    Akses layanan pasien dengan lebih mudah.
+                </h2>
+
+            </div>
+
+            <a href="form_pasien.php">
+                Daftarkan Pasien →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+        © <?= date("Y"); ?> Harmoni Sejahtera Mental Hospital.
+        Sistem Informasi Rumah Sakit.
+    </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>
